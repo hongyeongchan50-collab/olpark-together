@@ -1,0 +1,15 @@
+name: Public data refresh and Pages deployment
+on: { push: { branches: [main] }, workflow_dispatch: {}, schedule: [{ cron: '17 1,7,13,19 * * *' }] }
+permissions: { contents: write, pages: write, id-token: write }
+concurrency: { group: olpark-pages, cancel-in-progress: false }
+jobs:
+  test-refresh-deploy:
+    runs-on: ubuntu-latest
+    environment: { name: github-pages }
+    steps:
+    - uses: actions/checkout@v4
+    - { uses: actions/setup-python@v5, with: { python-version: '3.12' } }
+    - { name: Refresh public snapshot and build site, run: bash scripts/ci_build.sh }
+    - uses: actions/configure-pages@v5
+    - { uses: actions/upload-pages-artifact@v3, with: { path: dist } }
+    - { id: deployment, uses: actions/deploy-pages@v4 }
