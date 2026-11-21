@@ -1,14 +1,14 @@
 /* 공식 데이터 스냅샷 · 수집/갱신 상태는 meta에서 확인 */
 window.OLPARK_DATA = {
   "meta": {
-    "asOf": "2026-11-21T01:11:21+09:00",
+    "asOf": "2026-11-21T09:49:52+09:00",
     "mode": "확인본 + 실제 공공데이터 갱신: FAQ, 주차",
     "faqSource": "공공데이터포털 원본 CSV 15089962",
     "eventSource": "기관 공식 공연일정 공개페이지 / 공공데이터셋 3037877",
     "parkingSource": "기관 실시간 주차현황 API / 공개목록 64",
     "schema": 1,
-    "faqUpdatedAt": "2026-11-21T01:11:20+09:00",
-    "lastRefreshAttemptAt": "2026-11-21T01:11:21+09:00"
+    "faqUpdatedAt": "2026-11-21T09:49:51+09:00",
+    "lastRefreshAttemptAt": "2026-11-21T09:49:52+09:00"
   },
   "events": [
     {
@@ -598,8 +598,8 @@ window.OLPARK_DATA = {
     }
   ],
   "parking": {
-    "parking_sum": "1025",
-    "collectedAt": "2026-11-21T01:11:21+09:00",
+    "parking_sum": "1857",
+    "collectedAt": "2026-11-21T09:49:52+09:00",
     "source": "공식 실시간 주차 API(공개목록 64)",
     "sourceUrl": "https://www.ksponco.or.kr/online/main/parkingorsApi.do?apiKey=PARKING21803504",
     "fieldMeaning": "기관 설명상 주차대수. 잔여면·점유율·주차장별 수치 의미 불명확"
