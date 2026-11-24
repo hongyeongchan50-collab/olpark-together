@@ -12,4 +12,4 @@ jobs:
     - { name: Refresh public snapshot and build site, run: bash scripts/ci_build.sh }
     - uses: actions/configure-pages@v5
     - { uses: actions/upload-pages-artifact@v3, with: { path: dist } }
-    - { id: deployment, uses: actions/deploy-pages@v4 }
+    - { id: deployment, uses: actions/deploy-pages@v5}
