@@ -36,3 +36,14 @@
 | 공연 3037877 | 인증키 미보유로 기관 공식 공연일정 확인본 14건 유지(`eventUpdatedAt` 미기록 = API 미연동) |
 | 단위 테스트 | 12/12 통과 |
 | 화면 검증 | 1100px 데스크톱·390px 모바일 실행 캡처, 지표 14/37/5/4 확인 |
+
+## 2026-11-25 Pages 배포 잡 분리 및 복구
+
+| 항목 | 결과 |
+| --- | --- |
+| 실패 증빙 | `2026-11-25 08:02` 예약 실행(`run 45506392284`)에서 `github-pages` 아티팩트 업로드 성공(Artifact ID 14972814020) 직후 `deploy-pages@v5`가 0.3초 만에 `Found 0 artifact(s)`로 실패 |
+| 원인 | 같은 잡에서 업로드 직후 배포가 아티팩트 목록을 조회해, 인덱싱 완료 전 빈 목록을 받는 타이밍 문제 |
+| 조치 | `.github/workflows/pages.yml`(커밋 `0d7af69`)을 `refresh-build`(데이터 갱신·테스트·빌드·아티팩트 업로드)와 `deploy`(`needs`, `environment: github-pages`, `pages: write`/`id-token: write`/`actions: read`, 아티팩트 인덱싱 대기 스텝) 두 잡으로 분리 |
+| 복구 배포 | `run 45542778870`(push, 두 잡 모두 success). 배포 로그에 `Found 1 artifact(s)` → `Reported success!`, deployment `8047839825` 상태 success |
+| 라이브 확인 | `https://hongyeongchan50-collab.github.io/olpark-together/` 및 `index.html`·`assets/*`·`data/snapshot.js` HTTP 200, `meta.asOf` = `2026-11-25T12:51:09+09:00` |
+| 참고 | 재실행(같은 실행의 failed job 재실행)은 예약 실행의 고정 SHA에서 시작해 데이터 커밋 푸시가 non-fast-forward로 거부되므로, 수동 복구는 `workflow_dispatch`로 수행한다 |
